@@ -1,0 +1,2512 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 核心技能自我檢測表｜人資萬應室</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #1c2744;
+  --plum:    #4e3d5c;
+  --plum-lt: #6b5280;
+  --sand:    #cdb8a6;
+  --sand-lt: #e2d3c8;
+  --sand-xl: #f0e8e0;
+  --slate:   #2e3550;
+  --cream:   #f8f4ed;
+  --cream-dk:#ede7dd;
+  --white:   #ffffff;
+
+  --navy-a10: rgba(28,39,68,0.10);
+  --navy-a20: rgba(28,39,68,0.20);
+  --plum-a15: rgba(78,61,92,0.15);
+  --plum-a30: rgba(78,61,92,0.30);
+
+  --text-dark:  #1c2744;
+  --text-mid:   #3a3250;
+  --text-muted: #7a6e85;
+  --text-sand:  #8c7464;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: 'Noto Serif TC', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── SITE HEADER ─── */
+.site-header {
+  background: var(--navy);
+  color: var(--sand-lt);
+  text-align: center;
+  padding: 0.55rem 1rem;
+  letter-spacing: 0.18em;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+.site-header span { color: var(--sand); }
+
+/* ─── PROGRESS ─── */
+.progress-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--cream);
+  border-bottom: 1px solid var(--sand-lt);
+  padding: 0.6rem 1.5rem;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+.progress-bar.visible { display: flex; }
+.pb-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-muted); white-space: nowrap; letter-spacing: 0.08em; }
+.pb-track { flex: 1; height: 2px; background: var(--sand-lt); border-radius: 99px; }
+.pb-fill  { height: 100%; background: var(--plum); border-radius: 99px; transition: width 0.5s ease; }
+
+/* ─── WRAPPER ─── */
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* ─── INTRO COVER ─── */
+#screen-intro { padding: 0; }
+
+.cover-shell {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Animated grid lines */
+.cover-shell::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(205,184,166,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(205,184,166,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gridPulse {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Corner accent lines */
+.cover-shell::after {
+  content: '';
+  position: absolute;
+  top: 32px; left: 32px; right: 32px; bottom: 32px;
+  border: 1px solid rgba(205,184,166,0.25);
+  pointer-events: none;
+}
+
+.cover-inner {
+  position: relative; z-index: 2;
+  max-width: 720px; margin: 0 auto;
+  padding: 4rem 2rem 3.5rem;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* Corner tick marks */
+.cover-corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--sand);
+  border-style: solid;
+}
+.cover-corner.tl { top: 32px; left: 32px; border-width: 1px 0 0 1px; }
+.cover-corner.tr { top: 32px; right: 32px; border-width: 1px 1px 0 0; }
+.cover-corner.bl { bottom: 32px; left: 32px; border-width: 0 0 1px 1px; }
+.cover-corner.br { bottom: 32px; right: 32px; border-width: 0 1px 1px 0; }
+
+.cover-year-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(205,184,166,0.5);
+  margin-bottom: 2.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.cover-year-tag::before,
+.cover-year-tag::after {
+  content: '';
+  display: block; width: 40px; height: 1px;
+  background: rgba(205,184,166,0.3);
+}
+
+/* Glow ring behind title */
+.cover-glow-ring {
+  position: absolute;
+  width: 320px; height: 160px;
+  background: radial-gradient(ellipse, rgba(78,61,92,0.55) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  pointer-events: none;
+  animation: glowBreath 4s ease-in-out infinite;
+}
+@keyframes glowBreath {
+  0%,100% { opacity: 0.6; transform: translate(-50%,-55%) scale(1); }
+  50%      { opacity: 1;   transform: translate(-50%,-55%) scale(1.12); }
+}
+
+.cover-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sand);
+  opacity: 0.7;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.cover-title-wrap {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 9vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--sand-lt);
+  letter-spacing: -0.01em;
+  text-shadow:
+    0 0 40px rgba(205,184,166,0.35),
+    0 0 80px rgba(78,61,92,0.5),
+    0 0 120px rgba(78,61,92,0.25);
+  position: relative;
+}
+.cover-title .accent {
+  color: var(--sand);
+  text-shadow:
+    0 0 20px rgba(205,184,166,0.6),
+    0 0 50px rgba(205,184,166,0.35),
+    0 0 90px rgba(205,184,166,0.2);
+}
+
+/* Horizontal scanning line animation */
+.cover-scan-line {
+  position: absolute; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(205,184,166,0.4), transparent);
+  animation: scanDown 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanDown {
+  0%   { top: 0%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.cover-subtitle {
+  font-family: 'Space Grotesk', 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(226,211,200,0.55);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+.cover-divider {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(205,184,166,0.5), transparent);
+  margin: 0 auto 2.5rem;
+}
+
+.cover-body {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.95rem; line-height: 2.1;
+  color: rgba(226,211,200,0.7);
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.cover-chips {
+  display: flex; gap: 0.6rem; flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.75rem;
+}
+.cover-chip {
+  border: 1px solid rgba(205,184,166,0.2);
+  border-radius: 2px; padding: 0.45rem 0.9rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.1em;
+  color: rgba(205,184,166,0.55);
+  display: flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.03);
+}
+.cover-chip strong { color: var(--sand); font-size: 0.82rem; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  background: transparent;
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  padding: 1rem 2.5rem;
+  font-family: 'Space Grotesk', 'Noto Serif TC', serif;
+  font-size: 0.92rem; font-weight: 500;
+  color: var(--sand-lt);
+  cursor: pointer; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--plum);
+  transform: translateX(-101%);
+  transition: transform 0.25s ease;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { box-shadow: 0 0 24px rgba(78,61,92,0.5); }
+.btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+.btn-primary svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ─── COVER INSTRUCTIONS ─── */
+.cover-instructions {
+  width: 100%; max-width: 560px;
+  margin-bottom: 2.5rem;
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid rgba(205,184,166,0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ci-row {
+  display: flex; align-items: flex-start; gap: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(205,184,166,0.12);
+  background: rgba(255,255,255,0.03);
+  transition: background 0.2s;
+}
+.ci-row:last-child { border-bottom: none; }
+.ci-row:hover { background: rgba(255,255,255,0.06); }
+.ci-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; color: var(--sand); opacity: 0.6;
+  letter-spacing: 0.1em; flex-shrink: 0; padding-top: 2px;
+  min-width: 20px;
+}
+.ci-text { flex: 1; }
+.ci-zh {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.82rem; line-height: 1.8;
+  color: rgba(226,211,200,0.75);
+  margin-bottom: 0.3rem;
+}
+.ci-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; line-height: 1.7;
+  color: rgba(205,184,166,0.4);
+  letter-spacing: 0.02em;
+}
+.ci-note {
+  display: inline-block; margin-top: 0.4rem;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.75rem; color: rgba(205,184,166,0.45); letter-spacing: 0.04em;
+}
+.ci-note-en {
+  display: inline-block; margin-top: 0.2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; color: rgba(205,184,166,0.3); letter-spacing: 0.03em;
+}
+
+/* ─── BILINGUAL MICRO-LABELS ─── */
+.chip-en {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(205,184,166,0.4); margin-top: 2px;
+}
+.pill-en {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem; letter-spacing: 0.08em;
+  color: rgba(205,184,166,0.38); margin-top: 1px;
+}
+.collect-title-en {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(205,184,166,0.38);
+  margin-top: 0.5rem; line-height: 1.7;
+}
+.r-radar-label-en {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; color: rgba(205,184,166,0.32); letter-spacing: 0.04em;
+}
+.r-enc-quote-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; line-height: 1.75;
+  color: rgba(205,184,166,0.35); letter-spacing: 0.03em;
+  margin-top: 0.5rem; margin-bottom: 1.5rem; text-align: center;
+}
+.r-social-invite-en {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; line-height: 1.7;
+  color: rgba(205,184,166,0.32); letter-spacing: 0.03em; margin-top: 0.4rem;
+}
+
+.cover-tagline {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.9rem; line-height: 1.9;
+  color: rgba(226,211,200,0.65);
+  max-width: 440px;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+.cover-tagline-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; line-height: 1.7;
+  color: rgba(205,184,166,0.32);
+  letter-spacing: 0.04em;
+  max-width: 440px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ─── COVER BODY EN & DOMAIN PILLS ─── */
+.cover-body-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; line-height: 1.8;
+  color: rgba(205,184,166,0.4);
+  letter-spacing: 0.03em;
+  max-width: 480px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.cover-domain-pills {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.domain-pill {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.75rem;
+  color: rgba(226,211,200,0.75);
+  border: 1px solid rgba(205,184,166,0.3);
+  border-radius: 999px;
+  padding: 0.3rem 1rem;
+  background: rgba(255,255,255,0.04);
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s, background 0.2s;
+}
+.domain-pill:hover { border-color: rgba(205,184,166,0.6); background: rgba(255,255,255,0.08); }
+
+/* Type grid at bottom of cover */
+.cover-type-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  width: 100%; margin-top: 3rem;
+  border-top: 1px solid rgba(205,184,166,0.15);
+}
+.cover-type-cell {
+  padding: 1.25rem 0.75rem; text-align: center;
+  border-right: 1px solid rgba(205,184,166,0.1);
+  position: relative;
+}
+.cover-type-cell:last-child { border-right: none; }
+.ctype-icon { font-size: 1.25rem; margin-bottom: 0.5rem; display: block; }
+.ctype-tag {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  color: rgba(205,184,166,0.4); letter-spacing: 0.12em;
+  text-transform: uppercase; display: block; margin-bottom: 0.25rem;
+}
+.ctype-name {
+  font-family: 'Noto Serif TC', serif; font-size: 0.78rem;
+  color: rgba(226,211,200,0.7); font-weight: 500; display: block;
+  margin-bottom: 0.3rem;
+}
+.ctype-tagline {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  color: rgba(205,184,166,0.45); display: block; line-height: 1.5;
+}
+
+/* ─── QUIZ ─── */
+#screen-quiz { display: none; padding: 2.5rem 0 5rem; }
+
+.q-header { margin-bottom: 2rem; }
+.q-meta-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.q-counter { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.12em; }
+.q-section-tag {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  padding: 3px 10px; border-radius: 2px; letter-spacing: 0.1em;
+  text-transform: uppercase; background: var(--plum-a15); color: var(--plum);
+  border: 1px solid var(--plum-a30);
+}
+
+.q-text {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(1.05rem, 2.8vw, 1.2rem);
+  font-weight: 500; line-height: 1.8; color: var(--navy);
+  margin-bottom: 0.6rem;
+}
+.q-text-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem; color: var(--text-muted);
+  line-height: 1.7; margin-bottom: 2rem; letter-spacing: 0.03em;
+}
+
+.options { display: flex; flex-direction: column; gap: 0.65rem; }
+
+.opt {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  padding: 1rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--sand-lt);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.15s;
+  text-align: left; font-family: inherit;
+  color: var(--text-dark); width: 100%;
+}
+.opt:hover { border-color: var(--plum); background: rgba(78,61,92,0.04); transform: translateX(3px); }
+.opt.selected-correct { border-color: #5a8a5a; background: rgba(90,138,90,0.06); pointer-events: none; }
+.opt.selected-wrong   { border-color: var(--sand); background: var(--sand-xl); pointer-events: none; opacity: 0.65; }
+.opt.reveal           { pointer-events: none; }
+
+.opt-key {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  min-width: 20px; height: 20px; border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-dk); color: var(--text-muted);
+  flex-shrink: 0; margin-top: 2px; border: 1px solid var(--sand-lt);
+}
+.opt-body { flex: 1; }
+.opt-zh { font-size: 0.9rem; line-height: 1.65; font-family: 'Noto Serif TC', serif; }
+.opt-en { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; font-family: 'DM Mono', monospace; letter-spacing: 0.02em; }
+
+/* ─── RESULT ─── */
+#screen-result { display: none; padding: 3rem 0 5rem; }
+
+.result-header { text-align: center; margin-bottom: 3rem; }
+.result-kicker { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.result-type-badge {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; color: var(--plum); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 2rem;
+}
+.result-type-icon { font-size: 1.1rem; }
+.result-title-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700; color: var(--navy); line-height: 1.05; margin-bottom: 0.4rem;
+}
+.result-title-zh .accent { color: var(--plum); }
+.result-title-en {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.result-persona {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  color: var(--plum); letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+.result-quote {
+  border-left: 3px solid var(--plum);
+  padding: 1rem 1.5rem;
+  margin: 2.5rem 0;
+  background: var(--plum-a15);
+  border-radius: 0 4px 4px 0;
+}
+.result-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; line-height: 1.8; color: var(--navy);
+}
+.result-quote .en {
+  font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;
+}
+
+.result-section { margin-bottom: 2rem; }
+.rs-label {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--sand-lt);
+}
+.rs-body { font-size: 0.95rem; line-height: 1.95; color: var(--text-mid); }
+.rs-body li { margin-left: 1.25rem; margin-bottom: 0.35rem; }
+.rs-body strong { color: var(--navy); font-weight: 500; }
+
+/* Distribution bar */
+.dist-wrap { margin: 2.5rem 0; }
+.dist-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--sand-lt); }
+.dist-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.dist-name { font-family: 'Noto Serif TC', serif; font-size: 0.78rem; color: var(--text-mid); min-width: 80px; }
+.dist-track { flex: 1; height: 6px; background: var(--sand-xl); border-radius: 99px; overflow: hidden; }
+.dist-fill { height: 100%; border-radius: 99px; transition: width 1.2s cubic-bezier(0.34,1.2,0.64,1) 0.3s; }
+.dist-count { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-muted); min-width: 20px; }
+
+.type-explorer  .dist-fill, .fill-explorer  { background: #3a5fa0; }
+.type-supporter .dist-fill, .fill-supporter { background: var(--plum); }
+.type-guardian  .dist-fill, .fill-guardian  { background: #8a6e44; }
+.type-enabler   .dist-fill, .fill-enabler   { background: #3a7a5a; }
+
+/* ─── RESULT (dark cover style) ─── */
+#screen-result { display: none; padding: 0; }
+
+.result-shell {
+  background: var(--navy);
+  position: relative; overflow: hidden;
+  min-height: 100vh;
+}
+.result-shell::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(205,184,166,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(205,184,166,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.result-shell::after {
+  content: '';
+  position: absolute;
+  top: 32px; left: 32px; right: 32px; bottom: 32px;
+  border: 1px solid rgba(205,184,166,0.18);
+  pointer-events: none;
+}
+.result-corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--sand);
+  border-style: solid;
+  z-index: 3;
+}
+.result-corner.tl { top: 32px; left: 32px; border-width: 1px 0 0 1px; }
+.result-corner.tr { top: 32px; right: 32px; border-width: 1px 1px 0 0; }
+.result-corner.bl { bottom: 32px; left: 32px; border-width: 0 0 1px 1px; }
+.result-corner.br { bottom: 32px; right: 32px; border-width: 0 1px 1px 0; }
+
+.result-inner {
+  position: relative; z-index: 2;
+  max-width: 720px; margin: 0 auto;
+  padding: 3.5rem 2rem 4rem;
+}
+
+/* Result header */
+.rh-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(205,184,166,0.45);
+  text-align: center; margin-bottom: 1.5rem;
+}
+.rh-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(205,184,166,0.25);
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; color: var(--sand); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.rh-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  font-weight: 700; line-height: 1.05;
+  color: var(--sand-lt);
+  text-shadow:
+    0 0 40px rgba(205,184,166,0.3),
+    0 0 80px rgba(78,61,92,0.4);
+  margin-bottom: 0.4rem;
+}
+.rh-title .accent {
+  color: var(--sand);
+  text-shadow: 0 0 20px rgba(205,184,166,0.5), 0 0 50px rgba(205,184,166,0.25);
+}
+.rh-en {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem; color: rgba(205,184,166,0.45);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.3rem;
+}
+.rh-persona {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  color: rgba(205,184,166,0.45); letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+/* Result quote */
+.r-quote {
+  border-left: 2px solid rgba(205,184,166,0.35);
+  padding: 0.9rem 1.25rem;
+  margin: 2rem 0;
+  background: rgba(255,255,255,0.03);
+}
+.r-quote p {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1rem; line-height: 1.85; color: rgba(226,211,200,0.8);
+}
+.r-quote .en {
+  font-size: 0.72rem; color: rgba(205,184,166,0.4);
+  margin-top: 0.4rem; font-family: 'DM Mono', monospace;
+  letter-spacing: 0.03em;
+}
+
+/* Section blocks */
+.r-section { margin-bottom: 1.75rem; }
+.r-section-label {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--sand); opacity: 0.6;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(205,184,166,0.12);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.r-section-label::before {
+  content: '';
+  display: block; width: 16px; height: 1px;
+  background: rgba(205,184,166,0.4);
+}
+.r-section-label--lg {
+  font-size: 0.82rem !important;
+  letter-spacing: 0.14em !important;
+  opacity: 1 !important;
+  color: var(--sand-lt) !important;
+  margin-bottom: 1rem !important;
+}
+.r-body {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.9rem; line-height: 2; color: rgba(226,211,200,0.72);
+}
+.r-body li { margin-left: 1.25rem; margin-bottom: 0.35rem; }
+.r-action-list { list-style: none; margin-left: 0 !important; }
+.r-action-list li {
+  padding: 0.55rem 0.75rem 0.55rem 1rem;
+  margin-bottom: 0.4rem !important;
+  border-left: 2px solid rgba(205,184,166,0.25);
+  background: rgba(255,255,255,0.02);
+  color: rgba(226,211,200,0.75);
+}
+.r-action-list li::marker { content: ''; }
+
+/* Radar chart */
+.radar-wrap {
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+  justify-content: center;
+}
+.radar-svg { width: 220px; height: 220px; flex-shrink: 0; }
+.radar-bars { flex: 1; min-width: 180px; }
+.r-radar-row { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.7rem; }
+.r-radar-label {
+  font-family: 'Noto Serif TC', serif; font-size: 0.72rem;
+  color: rgba(226,211,200,0.55); min-width: 72px;
+}
+.fill-sand { background: rgba(205,184,166,0.7) !important; }
+
+/* Distribution bars (dark) */
+.r-dist-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+.r-dist-name {
+  font-family: 'Noto Serif TC', serif; font-size: 0.75rem;
+  color: rgba(226,211,200,0.55); min-width: 80px;
+}
+.r-dist-track {
+  flex: 1; height: 4px;
+  background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden;
+}
+.r-dist-fill { height: 100%; border-radius: 99px; transition: width 1.2s cubic-bezier(0.34,1.2,0.64,1) 0.3s; }
+.r-dist-count {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  color: rgba(205,184,166,0.4); min-width: 16px;
+}
+
+/* Encouragement (dark) */
+.r-encouragement {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-top: 1px solid rgba(205,184,166,0.12);
+  margin-top: 2rem;
+}
+.r-enc-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 500;
+  color: rgba(226,211,200,0.75);
+  line-height: 1.75; margin-bottom: 2rem;
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+.btn-restart-dark {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(205,184,166,0.3);
+  border-radius: 2px; padding: 0.75rem 1.75rem;
+  color: rgba(226,211,200,0.6);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; cursor: pointer; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.btn-restart-dark:hover { border-color: var(--sand); color: var(--sand-lt); background: rgba(255,255,255,0.04); }
+
+/* Social block dark version */
+.r-social-block {
+  text-align: center;
+  padding: 2.5rem 1rem 3rem;
+  border-top: 1px solid rgba(205,184,166,0.12);
+}
+.r-social-invite {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.95rem; line-height: 2; color: rgba(226,211,200,0.65);
+  margin-bottom: 1.75rem;
+}
+.r-social-invite .wand { margin-right: 0.4rem; }
+.r-social-links {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+}
+.r-social-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.3rem;
+  border-radius: 2px; border: 1px solid rgba(205,184,166,0.2);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.08em;
+  text-decoration: none; color: rgba(205,184,166,0.6);
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+}
+.r-social-btn:hover { border-color: var(--sand); color: var(--sand-lt); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+.r-social-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Bilingual body en */
+.r-body-en {
+  font-size: 0.75rem !important;
+  color: rgba(205,184,166,0.4) !important;
+  font-family: 'DM Mono', monospace !important;
+  letter-spacing: 0.02em;
+  margin-top: 0.5rem;
+  line-height: 1.7 !important;
+}
+.r-en-sub {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(205,184,166,0.38);
+  margin-top: 0.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+.r-bilingual-list li { margin-bottom: 0.75rem !important; }
+
+/* ─── SHARE CARD SECTION ─── */
+.r-share-section { margin: 2rem 0; }
+.r-share-hint {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.85rem; line-height: 1.9;
+  color: rgba(226,211,200,0.55);
+  margin-bottom: 1.5rem;
+}
+
+/* Preview card — proportional preview at 360×640 (9:16), scales up to 1080×1920 on export */
+#result-card {
+  position: relative;
+  width: 360px;
+  height: auto;          /* let content dictate height — no more overflow */
+  min-height: 640px;     /* keep a minimum so it doesn't look too short */
+  margin: 0 auto 1.5rem;
+  background: #111827;
+  border-radius: 16px;
+  padding: 40px 36px 36px;
+  box-sizing: border-box;
+  overflow: visible;     /* was hidden — was clipping footer */
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow:
+    0 0 0 1px rgba(205,184,166,0.3),
+    0 0 48px rgba(78,61,92,0.4),
+    inset 0 0 80px rgba(0,0,0,0.35);
+}
+
+/* Subtle corner ticks — purely decorative, absolutely positioned */
+.sc-corner {
+  position: absolute; width: 14px; height: 14px;
+  border-color: rgba(205,184,166,0.35); border-style: solid;
+  pointer-events: none;
+}
+.sc-tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; border-radius: 2px 0 0 0; }
+.sc-tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; border-radius: 0 2px 0 0; }
+.sc-bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; border-radius: 0 0 0 2px; }
+.sc-br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; border-radius: 0 0 2px 0; }
+
+/* Brand row */
+.sc-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(205,184,166,0.32);
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+/* Badge */
+.sc-type-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'DM Mono', monospace; font-size: 0.52rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--sand);
+  border: 1px solid rgba(205,184,166,0.28);
+  padding: 4px 12px; border-radius: 999px;
+  background: rgba(205,184,166,0.07);
+  margin-bottom: 12px;
+  flex-shrink: 0; align-self: flex-start;
+}
+
+/* Title block */
+.sc-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 2.1rem; font-weight: 700;
+  line-height: 1.2; letter-spacing: -0.01em;
+  color: #e2d3c8;
+  margin: 0 0 8px 0;
+  text-shadow: 0 0 32px rgba(205,184,166,0.2);
+  flex-shrink: 0;
+  max-width: 100%;
+}
+.sc-title-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(205,184,166,0.38);
+  margin: 0 0 14px 0;
+  flex-shrink: 0;
+}
+
+/* Thin divider */
+.sc-divider {
+  width: 48px; height: 1px;
+  background: linear-gradient(90deg, rgba(205,184,166,0.45) 0%, transparent 100%);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+/* Status text */
+.sc-status {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.7rem; line-height: 1.75;
+  color: rgba(226,211,200,0.62);
+  max-width: 90%;
+  margin: 0 0 6px 0;
+  flex-shrink: 0;
+}
+.sc-status-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem; line-height: 1.6;
+  color: rgba(205,184,166,0.32);
+  letter-spacing: 0.02em;
+  max-width: 90%;
+  margin: 0 0 12px 0;
+  flex-shrink: 0;
+}
+
+/* Radar section — natural size, not stretching */
+.sc-radar-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+.sc-radar-label {
+  font-family: 'DM Mono', monospace; font-size: 0.48rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(205,184,166,0.32);
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+/* Radar + bars stacked vertically inside card */
+.sc-radar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sc-radar-svg-wrap {
+  display: flex; justify-content: center;
+}
+.sc-radar-svg { width: 110px; height: 110px; display: block; }
+.sc-bars { display: flex; flex-direction: column; gap: 6px; }
+.sc-bar-row { display: flex; align-items: center; gap: 6px; }
+.sc-bar-name {
+  font-family: 'Noto Serif TC', serif; font-size: 0.58rem;
+  color: rgba(226,211,200,0.48); min-width: 56px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.sc-bar-name-en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.42rem; color: rgba(205,184,166,0.28);
+  letter-spacing: 0.03em; line-height: 1.2;
+}
+.sc-bar-track {
+  flex: 1; height: 3px; background: rgba(255,255,255,0.06);
+  border-radius: 99px; overflow: hidden;
+}
+.sc-bar-fill { height: 100%; background: rgba(205,184,166,0.62); border-radius: 99px; }
+.sc-bar-pct {
+  font-family: 'DM Mono', monospace; font-size: 0.52rem;
+  color: rgba(205,184,166,0.38); min-width: 28px; text-align: right; flex-shrink: 0;
+}
+
+/* Footer */
+.sc-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(205,184,166,0.1);
+  margin-top: auto;      /* push to bottom of flex column */
+  padding-bottom: 4px;
+  flex-shrink: 0;
+}
+.sc-url, .sc-date {
+  font-family: 'DM Mono', monospace; font-size: 0.48rem;
+  color: rgba(205,184,166,0.25); letter-spacing: 0.06em;
+}
+
+/* Download button */
+.sc-download-btn {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin: 0 auto;
+  background: rgba(205,184,166,0.08);
+  border: 1px solid rgba(205,184,166,0.35);
+  border-radius: 4px; padding: 0.85rem 2rem;
+  color: var(--sand-lt);
+  font-family: 'Noto Serif TC', serif; font-size: 0.9rem;
+  cursor: pointer; letter-spacing: 0.08em;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.sc-download-btn:hover {
+  background: rgba(205,184,166,0.15);
+  box-shadow: 0 0 20px rgba(205,184,166,0.15);
+  transform: translateY(-1px);
+}
+
+/* Encouragement */
+.encouragement {
+  text-align: center; padding: 3rem 1.5rem;
+  border-top: 1px solid var(--sand-lt); margin-top: 3rem;
+}
+.enc-icon { font-size: 2rem; margin-bottom: 1rem; }
+.enc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 600; color: var(--navy);
+  margin-bottom: 1rem;
+}
+.enc-body {
+  font-size: 0.9rem; line-height: 2; color: var(--text-mid);
+  max-width: 520px; margin: 0 auto 2rem;
+}
+.btn-restart {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; border: 1px solid var(--plum);
+  border-radius: 4px; padding: 0.75rem 1.75rem;
+  color: var(--plum); font-family: 'Noto Serif TC', serif;
+  font-size: 0.9rem; cursor: pointer; letter-spacing: 0.06em;
+  transition: all 0.2s;
+}
+.btn-restart:hover { background: var(--plum); color: var(--sand-lt); }
+
+/* Footer */
+.footer {
+  background: var(--navy); color: var(--text-muted);
+  text-align: center; padding: 1.25rem;
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.12em;
+}
+.footer span { color: var(--sand); }
+
+/* ─── SOCIAL BLOCK ─── */
+.social-block {
+  text-align: center;
+  padding: 2.5rem 1.5rem 3rem;
+  border-top: 1px solid var(--sand-lt);
+  margin-top: 0;
+}
+.social-invite {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1rem; line-height: 1.9; color: var(--text-mid);
+  margin-bottom: 1.75rem;
+}
+.social-invite strong { color: var(--navy); font-weight: 600; }
+.social-links {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+}
+.social-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px; border: 1px solid;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  text-decoration: none; font-weight: 500;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.social-btn:hover { transform: translateY(-2px); }
+.social-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.social-li { border-color: #0077b5; color: #0077b5; background: rgba(0,119,181,0.05); }
+.social-li:hover { background: #0077b5; color: #fff; }
+.social-ig { border-color: #c13584; color: #c13584; background: rgba(193,53,132,0.05); }
+.social-ig:hover { background: #c13584; color: #fff; }
+.social-fb { border-color: #1877f2; color: #1877f2; background: rgba(24,119,242,0.05); }
+.social-fb:hover { background: #1877f2; color: #fff; }
+
+/* ─── COLLECT SCREEN ─── */
+#screen-collect { display: none; }
+
+.collect-shell {
+  background: var(--navy);
+  position: relative; overflow: hidden;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem 1.25rem;
+}
+.collect-shell::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(205,184,166,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(205,184,166,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.collect-card {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 480px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(205,184,166,0.18);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(12px);
+}
+.collect-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(205,184,166,0.4);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.collect-eyebrow::before {
+  content: ''; display: block; width: 20px; height: 1px;
+  background: rgba(205,184,166,0.3);
+}
+.collect-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 700; line-height: 1.15;
+  color: var(--sand-lt); margin-bottom: 0.5rem;
+}
+.collect-subtitle {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.85rem; line-height: 1.9;
+  color: rgba(226,211,200,0.55); margin-bottom: 2rem;
+}
+.collect-field { margin-bottom: 1.25rem; }
+.collect-label {
+  display: block;
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(205,184,166,0.5); margin-bottom: 0.5rem;
+}
+.collect-input {
+  width: 100%; box-sizing: border-box;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(205,184,166,0.2);
+  border-radius: 2px;
+  padding: 0.75rem 1rem;
+  color: var(--sand-lt);
+  font-family: 'Noto Serif TC', serif; font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.collect-input::placeholder { color: rgba(205,184,166,0.25); }
+.collect-input:focus {
+  border-color: rgba(205,184,166,0.5);
+  background: rgba(255,255,255,0.07);
+}
+.collect-input.error { border-color: rgba(220,80,80,0.6); }
+.collect-error {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: rgba(220,100,100,0.8); letter-spacing: 0.06em;
+  margin-top: 0.35rem; display: none;
+}
+.collect-error.show { display: block; }
+.collect-submit {
+  width: 100%; margin-top: 1.75rem;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  background: rgba(205,184,166,0.1);
+  border: 1px solid rgba(205,184,166,0.35);
+  border-radius: 2px; padding: 1rem 1.5rem;
+  color: var(--sand-lt);
+  font-family: 'Noto Serif TC', serif; font-size: 1rem;
+  cursor: pointer; letter-spacing: 0.08em;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.collect-submit:hover:not(:disabled) {
+  background: rgba(205,184,166,0.18);
+  box-shadow: 0 0 20px rgba(205,184,166,0.12);
+}
+.collect-submit:disabled { opacity: 0.55; cursor: default; }
+.collect-privacy {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  color: rgba(205,184,166,0.22); letter-spacing: 0.06em;
+  text-align: center; margin-top: 1.25rem; line-height: 1.6;
+}
+
+/* Global: no italics */
+* { font-style: normal !important; }
+
+.fade-in { animation: fi 0.45s ease both; }
+@keyframes fi { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — MOBILE  (≤ 600px)
+   ══════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* ── 1. Global wrapper — 90% width, centred, generous side margins ── */
+  .wrap {
+    width: 90%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1.1rem;   /* extra inner breathing room */
+  }
+
+  /* ── Cover adjustments ── */
+  .cover-inner { padding: 3rem 1.5rem 2.5rem; }
+  .cover-shell::after { top: 16px; left: 16px; right: 16px; bottom: 16px; }
+  .cover-corner.tl { top: 16px; left: 16px; }
+  .cover-corner.tr { top: 16px; right: 16px; }
+  .cover-corner.bl { bottom: 16px; left: 16px; }
+  .cover-corner.br { bottom: 16px; right: 16px; }
+  .cover-type-grid { grid-template-columns: 1fr 1fr; }
+
+  /* 3. Shrink intro title so long text never overflows */
+  .cover-title { font-size: clamp(2rem, 7.5vw, 3rem); }
+
+  .cover-body { font-size: 0.88rem; line-height: 2; }
+  .cover-body-en { font-size: 0.58rem; }
+  .cover-tagline { font-size: 0.82rem; line-height: 1.8; }
+  .cover-tagline-en { font-size: 0.52rem; margin-bottom: 1.5rem; }
+  .cover-domain-pills { gap: 0.45rem; }
+  .domain-pill { font-size: 0.7rem; padding: 0.28rem 0.8rem; }
+
+  /* ── 2. Quiz: wider padding on question card & options ── */
+  #screen-quiz { padding: 2rem 0 4rem; }
+
+  /* Question card */
+  .q-header {
+    margin-bottom: 1.5rem;
+    padding: 0 0.25rem;   /* slight extra indent inside .wrap */
+  }
+
+  .q-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+  }
+  .q-text-en {
+    font-size: 0.68rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Option items — more left/right padding for breathing room */
+  .opt {
+    padding: 0.9rem 1.25rem;   /* increased side padding */
+    gap: 0.75rem;
+    min-height: 52px;
+  }
+  .opt-zh { font-size: 0.85rem; line-height: 1.65; }
+  .opt-en { font-size: 0.65rem; }
+  .opt-key { min-width: 18px; height: 18px; font-size: 0.6rem; }
+
+  .q-meta-row { margin-bottom: 1.25rem; }
+
+  /* ── Result page shell ── */
+  .result-shell::after { top: 12px; left: 12px; right: 12px; bottom: 12px; }
+  .result-corner.tl { top: 12px; left: 12px; }
+  .result-corner.tr { top: 12px; right: 12px; }
+  .result-corner.bl { bottom: 12px; left: 12px; }
+  .result-corner.br { bottom: 12px; right: 12px; }
+
+  .result-inner { padding: 2.5rem 1.25rem 3rem; }
+  .result-title-zh { font-size: 2.4rem; }
+
+  .radar-wrap { gap: 1rem; }
+  .radar-svg { width: 180px; height: 180px; }
+
+  .r-section-label--lg { font-size: 0.72rem !important; }
+
+  .r-action-list li,
+  .r-bilingual-list li { font-size: 0.82rem; line-height: 1.75; }
+  .r-en-sub { font-size: 0.65rem; }
+
+  .r-share-section { margin: 1.5rem 0; }
+  .r-share-hint { font-size: 0.78rem; }
+
+  /* ── Result card — full width, no distortion ── */
+  #result-card {
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    aspect-ratio: unset;   /* let height follow content on mobile too */
+    padding: 28px 24px 28px;
+    border-radius: 10px;
+  }
+
+  .sc-brand { font-size: 0.42rem; margin-bottom: 12px; }
+  .sc-type-badge { font-size: 0.45rem; padding: 3px 9px; margin-bottom: 8px; }
+  .sc-title { font-size: clamp(1.4rem, 6vw, 2rem); margin-bottom: 4px; }
+  .sc-title-en { font-size: 0.45rem; margin-bottom: 10px; }
+  .sc-divider { margin-bottom: 10px; }
+  .sc-status { font-size: 0.6rem; line-height: 1.65; margin-bottom: 4px; }
+  .sc-status-en { font-size: 0.4rem; margin-bottom: 8px; }
+  .sc-bar-name { font-size: 0.48rem; min-width: 44px; }
+  .sc-bar-name-en { font-size: 0.36rem; }
+  .sc-radar-label { font-size: 0.42rem; margin-bottom: 6px; }
+  .sc-radar-svg { width: 80px; height: 80px; }
+  .sc-bar-name { font-size: 0.48rem; min-width: 44px; }
+  .sc-bar-track { height: 2px; }
+  .sc-bar-pct { font-size: 0.44rem; min-width: 22px; }
+  .sc-bar-row { gap: 4px; margin-bottom: 3px; }
+  .sc-footer { margin-top: 8px; padding-top: 8px; }
+  .sc-url, .sc-date { font-size: 0.4rem; }
+  .sc-radar-wrap { gap: 8px; }
+
+  .sc-download-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  /* ── Collect form — full-width, touch-friendly ── */
+  .collect-card { padding: 2rem 1.25rem 1.75rem; border-radius: 2px; }
+  .collect-title { font-size: 1.5rem; }
+  .collect-subtitle { font-size: 0.8rem; line-height: 1.85; margin-bottom: 1.5rem; }
+  .collect-input {
+    padding: 0.9rem 1.1rem;
+    font-size: 1rem;         /* prevents iOS Safari auto-zoom */
+    border-radius: 4px;
+  }
+  .collect-label { font-size: 0.58rem; }
+  .collect-field { margin-bottom: 1rem; }
+  .collect-submit {
+    padding: 1.1rem 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    min-height: 52px;
+  }
+  .collect-privacy { font-size: 0.5rem; margin-top: 1rem; }
+}
+
+/* Extra-small screens (≤ 380px) */
+@media (max-width: 380px) {
+  .wrap { width: 92%; padding: 0 0.9rem; }
+  .cover-inner { padding: 2.5rem 1.1rem 2rem; }
+  .cover-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .collect-card { padding: 1.75rem 1rem 1.5rem; }
+  .result-inner { padding: 2rem 1rem 2.5rem; }
+  #result-card { padding: 22px 18px 18px; }
+  .sc-title { font-size: 1.3rem; }
+  .q-text { font-size: 0.95rem; }
+  .opt { padding: 0.75rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <span>人資萬應室</span> &nbsp;·&nbsp; HR Room of Requirement &nbsp;·&nbsp; <span>AI 核心技能自我檢測</span>
+</div>
+
+<div class="progress-bar" id="progress-bar">
+  <span class="pb-label" id="pb-label">Q01 / 15</span>
+  <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:0%"></div></div>
+  <span class="pb-label" id="pb-pct">0%</span>
+</div>
+
+<div id="screen-intro">
+<div class="cover-shell">
+  <div class="cover-corner tl"></div>
+  <div class="cover-corner tr"></div>
+  <div class="cover-corner bl"></div>
+  <div class="cover-corner br"></div>
+
+  <div class="cover-inner">
+
+    <p class="cover-kicker">AI Core Skills Assessment</p>
+
+    <div class="cover-title-wrap">
+      <div class="cover-scan-line"></div>
+      <h1 class="cover-title">
+        你是哪種<br><span class="accent">AI 實踐者</span>？
+      </h1>
+    </div>
+
+    <p class="cover-subtitle">Discover Your AI Practice Archetype</p>
+
+    <p class="cover-tagline">找出最符合你的 AI 類型與能力風格，並提供針對性的成長建議。</p>
+    <p class="cover-tagline-en">Identify your AI archetype and receive targeted growth advice.</p>
+
+    <div class="cover-chips">
+      <div class="cover-chip"><strong>15</strong> 道情境題<span class="chip-en">Scenarios</span></div>
+      <div class="cover-chip"><strong>4</strong> 種人格類型<span class="chip-en">Archetypes</span></div>
+      <div class="cover-chip"><strong>3~5</strong> 分鐘完成<span class="chip-en">Minutes</span></div>
+    </div>
+
+    <div class="cover-domain-pills">
+      <span class="domain-pill">基礎使用<span class="pill-en">Basic Usage</span></span>
+      <span class="domain-pill">提示詞工程<span class="pill-en">Prompt Eng.</span></span>
+      <span class="domain-pill">特定工具<span class="pill-en">Tool Expertise</span></span>
+      <span class="domain-pill">應用場景<span class="pill-en">Application</span></span>
+      <span class="domain-pill">工作流設定<span class="pill-en">Workflow</span></span>
+    </div>
+
+    <div class="cover-instructions">
+      <div class="ci-row">
+        <div class="ci-text">
+          <p class="ci-zh">根據你日常工作或學習中的真實行為作答，<br>沒有正確或錯誤之分「誠實」作答才能得到最準確的類型分析。<br><span class="ci-note">備註：測驗結果僅供個人成長參考</span></p>
+          <p class="ci-en">Answer based on your real behavior — there are no right or wrong answers. Only honest responses lead to the most accurate type analysis.<br><span class="ci-note-en">Note: Results are for personal growth reference only.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">
+      <span>開始檢測 · Start Assessment</span>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+
+    <div class="cover-type-grid">
+      <div class="cover-type-cell">
+        <span class="ctype-icon">🔭</span>
+        <span class="ctype-tag">Tech Explorer</span>
+        <span class="ctype-name">科技探索者</span>
+        <span class="ctype-tagline">工具獵人，熱情先行</span>
+      </div>
+      <div class="cover-type-cell">
+        <span class="ctype-icon">⚡</span>
+        <span class="ctype-tag">All-round Supporter</span>
+        <span class="ctype-name">全能應援者</span>
+        <span class="ctype-tagline">萬能接單，欠缺聚焦</span>
+      </div>
+      <div class="cover-type-cell">
+        <span class="ctype-icon">🗝️</span>
+        <span class="ctype-tag">Treasure Guardian</span>
+        <span class="ctype-name">寶藏守護者</span>
+        <span class="ctype-tagline">囤積知識，待字閨中</span>
+      </div>
+      <div class="cover-type-cell">
+        <span class="ctype-icon">🏭</span>
+        <span class="ctype-tag">AI Enabler</span>
+        <span class="ctype-name">AI 賦能者</span>
+        <span class="ctype-tagline">場景鎖定，系統獲利</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div id="screen-quiz">
+<div class="wrap">
+  <div class="q-header">
+    <div class="q-meta-row">
+      <span class="q-counter" id="q-counter">QUESTION 01 / 15</span>
+      <span class="q-section-tag" id="q-section"></span>
+    </div>
+    <p class="q-text"  id="q-text"></p>
+    <p class="q-text-en" id="q-text-en"></p>
+  </div>
+  <div class="options" id="options"></div>
+</div>
+</div>
+
+<!-- ══ COLLECT ══ -->
+<div id="screen-collect">
+<div class="collect-shell">
+  <div class="collect-card fade-in">
+    <p class="collect-eyebrow">報告即將生成 · Report Ready</p>
+    <h2 class="collect-title">領取你的<br>專屬分析報告<br><span class="collect-title-en">Claim Your<br>Personalized Report</span></h2>
+    <p class="collect-subtitle">
+      輸入你的姓名與信箱，我們將把完整的 AI 類型分析報告寄送給你。<br>
+      Enter your name and email to receive your personalized AI type analysis report.
+    </p>
+
+    <div class="collect-field">
+      <label class="collect-label" for="collect-name">姓名 · Name</label>
+      <input class="collect-input" type="text" id="collect-name" placeholder="請輸入你的姓名" autocomplete="name" required>
+      <span class="collect-error" id="err-name">請輸入姓名 · Name is required</span>
+    </div>
+
+    <div class="collect-field">
+      <label class="collect-label" for="collect-email">電子信箱 · Email</label>
+      <input class="collect-input" type="email" id="collect-email" placeholder="your@email.com" autocomplete="email" required>
+      <span class="collect-error" id="err-email">請輸入有效的電子信箱 · Please enter a valid email</span>
+    </div>
+
+    <button class="collect-submit" id="collect-submit-btn" onclick="handleSubmit()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      確認送出，查看結果 · Submit &amp; View Results
+    </button>
+
+    <p class="collect-privacy">
+      你的資料僅用於發送報告，不會用於任何商業推廣。<br>
+      Your information is used solely to send your report and will not be used for any marketing purposes.
+    </p>
+  </div>
+</div>
+</div>
+
+<!-- ══ RESULT ══ -->
+<div id="screen-result">
+<div id="result-content"></div>
+</div>
+
+<div class="footer">
+  &copy; 2026 &nbsp;<span>人資萬應室 HR Room of Requirement</span>&nbsp; · AI 核心技能自我檢測表
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// ★  Google Apps Script 端點 (請貼上你的部署網址)  ★
+// ══════════════════════════════════════════════════════
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVJWogLXjMTakri2_qXdddyURqGDbOmaGlHiUMQVCjixHacJR7WyqbnPqu5fHt4JPj/exec';
+// 傳送欄位：name | email | score | type
+
+// ── DATA ──
+const SECTIONS = {
+  basic:    { zh:'基礎使用 (Basic Usage)', en:'Basic Usage' },
+  prompt:   { zh:'提示詞工程 (Prompt Engineering)', en:'Prompt Engineering' },
+  tools:    { zh:'特定工具 (Tool Expertise)', en:'Tool Expertise' },
+  scene:    { zh:'應用場景 (Practical Application)', en:'Practical Application' },
+  workflow: { zh:'工作流設定 (Workflow Mastery)', en:'Workflow Mastery' },
+};
+
+// Types: E=Explorer, S=Supporter, G=Guardian, N=Enabler
+const QS = [
+  // ── Q1–3: 基礎使用 ──
+  {
+    sec:'basic',
+    zh:'Q1. 早上老闆突然丟一份「下午就要交」的簡報給你，你第一反應是？',
+    en:'Your boss sends you a presentation "due this afternoon." What\'s your first reaction?',
+    opts:[
+      {zh:'立刻上網搜尋最近有哪些新推出的輔助工具可以快速生成內容。',en:'Immediately search online for the latest AI tools that can quickly generate content.',t:'E'},
+      {zh:'直接將資料丟入熟悉的對話型 AI，手動複製產出的文字到簡報中趕稿。',en:'Feed the material into a familiar conversational AI and manually copy the output into the slides.',t:'S'},
+      {zh:'先去筆記本翻找之前存過的 AI 簡報製作教學或操作步驟。',en:'First search your notes for previously saved AI presentation tutorials or steps.',t:'G'},
+      {zh:'啟動已設定好的自動化生成模板或標準操作流程產出。',en:'Activate a pre-configured automation template or standard operating flow to produce it.',t:'N'},
+    ]
+  },
+  {
+    sec:'basic',
+    zh:'Q2. 當朋友問你「AI 到底能幫我什麼？」你最可能怎麼回答？',
+    en:'A friend asks "What can AI actually do for me?" How do you most likely respond?',
+    opts:[
+      {zh:'興奮地解釋 AI 處理多種格式（如：文字轉圖影）的技術進展與未來趨勢。',en:'Excitedly explain AI\'s technical progress in handling multiple formats and future trends.',t:'E'},
+      {zh:'告訴他你可以幫他處理各種雜事，例如修圖或代寫初步草稿。',en:'Tell him you can help handle various tasks for him, like editing photos or drafting text.',t:'S'},
+      {zh:'傳給他一個整理好的 AI 工具清單，建議他先閱讀了解。',en:'Send him a curated list of AI tools and suggest he read through them first.',t:'G'},
+      {zh:'詢問他哪項重複工作最煩人，並示範如何用 AI 將該流程自動化。',en:'Ask which repetitive task frustrates him most, then demonstrate how to automate it with AI.',t:'N'},
+    ]
+  },
+  {
+    sec:'basic',
+    zh:'Q3. 檢視你目前的 AI 使用狀態，哪一種最像你？',
+    en:'Which best describes your current state of AI usage?',
+    opts:[
+      {zh:'訂閱了一堆付費 AI 軟體，只為了搶先體驗最新發布的功能。',en:'Subscribed to a bunch of paid AI software just to be first to experience the latest features.',t:'E'},
+      {zh:'AI 已經是我的救命恩人，沒它我每天都要加班到深夜。',en:'AI is my lifesaver — without it I\'d be working overtime every night.',t:'S'},
+      {zh:'追蹤了無數 AI 大神帳號，收藏夾裡全是必看的 AI 資訊。',en:'Follow countless AI expert accounts; my bookmarks are packed with must-read AI content.',t:'G'},
+      {zh:'很少換新工具，但手上的工具都已經被我串接成固定的自動系統。',en:'Rarely switch tools, but the ones I have are already connected into a fixed automated system.',t:'N'},
+    ]
+  },
+  // ── Q4–6: 提示詞工程 ──
+  {
+    sec:'prompt',
+    zh:'Q4. 你請 AI 幫你寫文案，但結果很普通，你通常會？',
+    en:'You ask AI to write copy but the result is mediocre. What do you usually do?',
+    opts:[
+      {zh:'認為目前的模型能力受限，嘗試切換到其他更新、更強的模型。',en:'Decide the current model is limited and try switching to a newer, more powerful one.',t:'E'},
+      {zh:'雖然不滿意，但為了交件，還是自己動手修改 AI 產出的草稿。',en:'Even though dissatisfied, edit the AI draft yourself to meet the deadline.',t:'S'},
+      {zh:'到社群討論區搜尋別人分享過的優質指令範例並直接套用。',en:'Search community forums for quality prompt examples others have shared and apply them directly.',t:'G'},
+      {zh:'調整指令的結構語法，並將優化後的指令存為可重複使用的範本。',en:'Adjust the prompt\'s structural syntax and save the optimized version as a reusable template.',t:'N'},
+    ]
+  },
+  {
+    sec:'prompt',
+    zh:'Q5. 當同事說「AI 產出的內容不夠好」時，你通常會？',
+    en:'When a colleague says "AI output isn\'t good enough," you typically respond by?',
+    opts:[
+      {zh:'跟他爭辯說這是因為他不懂底層邏輯，並推薦他去讀論文。',en:'Argue that it\'s because he doesn\'t understand the underlying logic, and recommend research papers.',t:'E'},
+      {zh:'直接跟他說：沒關係，我用 AI 幫你寫比較快，你不用學了。',en:'Tell him directly: "No worries, I\'ll use AI to write it faster for you — you don\'t need to learn it."',t:'S'},
+      {zh:'把你存了三個月的 Prompt 提示詞手冊轉發給他。',en:'Forward him the Prompt handbook you\'ve been saving for three months.',t:'G'},
+      {zh:'教他如何拆解任務、給予 AI 參考範例，並建立一套輸出規範。',en:'Teach him how to break down tasks, provide AI with reference examples, and establish output standards.',t:'N'},
+    ]
+  },
+  {
+    sec:'prompt',
+    zh:'Q6. 你平常管理 Prompt（指令）的方式比較像哪一種？',
+    en:'Which best describes how you typically manage your Prompts?',
+    opts:[
+      {zh:'留在對話紀錄或手機截圖中，每次需要時再隨興發揮。',en:'Keep them in chat history or phone screenshots and improvise each time.',t:'E'},
+      {zh:'雖然有用過成功的指令，但大多散落在各處，需要時得花時間翻找。',en:'Have successful prompts but they\'re scattered everywhere and take time to find.',t:'S'},
+      {zh:'在數位筆記中分門別類收藏了大量專家分享的指令精華。',en:'Categorized in digital notes with a large collection of expert-shared prompt highlights.',t:'G'},
+      {zh:'建立自己的指令庫或專屬 AI 小助手，確保每次產出品質穩定。',en:'Built your own prompt library or dedicated AI assistant to ensure consistent output quality.',t:'N'},
+    ]
+  },
+  // ── Q7–9: 特定工具 ──
+  {
+    sec:'tools',
+    zh:'Q7. 當社群開始瘋傳一個新的 AI 工具時，你通常會？',
+    en:'When a new AI tool goes viral on social media, you usually?',
+    opts:[
+      {zh:'第一時間註冊體驗，並在社群分享自己的使用評估與心得。',en:'Register immediately to try it and share your evaluation and thoughts on social media.',t:'E'},
+      {zh:'評估該軟體是否能幫自己接更多工作、提升作業時效。',en:'Evaluate whether the software can help you take on more work and improve efficiency.',t:'S'},
+      {zh:'先加入書籤收藏，想著未來遇到相關任務時再拿出來研究。',en:'Bookmark it first, thinking you\'ll research it when you encounter a relevant task.',t:'G'},
+      {zh:'研究它是否具備串接功能，能整合進目前的自動化系統中。',en:'Research whether it has integration capabilities to incorporate into your current automation system.',t:'N'},
+    ]
+  },
+  {
+    sec:'tools',
+    zh:'Q8. 觀察你現在打開 AI 工具（如 ChatGPT）時，最常做的行為是？',
+    en:'Observing your behavior when opening AI tools like ChatGPT, which is most common?',
+    opts:[
+      {zh:'測試它能不能解開最新的腦筋急轉彎，或是跟它聊哲學問題。',en:'Test whether it can solve the latest riddles or have philosophical conversations with it.',t:'E'},
+      {zh:'處理零散的日常工作，雖然速度很快，但每天都要重複輸入指令。',en:'Handle scattered daily tasks — fast, but you have to re-enter the same instructions every day.',t:'S'},
+      {zh:'嘗試之前在網路上看到的神奇案例，看看自己能不能做出來。',en:'Try replicating impressive cases you saw online to see if you can reproduce them.',t:'G'},
+      {zh:'點開已經設定好的工作流標籤，執行自動化腳本或處理任務。',en:'Open pre-configured workflow tabs and run automated scripts or process tasks.',t:'N'},
+    ]
+  },
+  {
+    sec:'tools',
+    zh:'Q9. 假設今天你最熟悉的 AI 工具突然掛了（例如 GPT 斷線），你會？',
+    en:'If your most familiar AI tool suddenly went down (e.g. GPT outage), you would?',
+    opts:[
+      {zh:'很興奮，因為這是一個研究替代方案與開源模型的絕佳機會。',en:'Feel excited — it\'s a great opportunity to research alternative solutions and open-source models.',t:'E'},
+      {zh:'感到崩潰，因為這代表我今天要手動加班到半夜了。',en:'Feel devastated — this means you\'ll be working manually until midnight tonight.',t:'S'},
+      {zh:'覺得很焦慮，因為我存了這麼多教學，卻還沒學會怎麼換工具。',en:'Feel anxious — you\'ve saved so many tutorials but never learned how to switch tools.',t:'G'},
+      {zh:'很淡定，因為我的邏輯框架早已固定，隨時能切換到備用方案。',en:'Feel calm — your logical framework is already set and you can switch to a backup anytime.',t:'N'},
+    ]
+  },
+  // ── Q10–12: 應用場景 ──
+  {
+    sec:'scene',
+    zh:'Q10. 如果朋友開咖啡店，你會怎麼幫他用 AI？',
+    en:'If a friend opens a coffee shop, how would you use AI to help them?',
+    opts:[
+      {zh:'推薦他導入 AI 視覺辨識點餐系統，讓整間店看起來科技感十足。',en:'Recommend implementing an AI visual menu ordering system to make the whole shop feel high-tech.',t:'E'},
+      {zh:'答應幫他代寫所有的 FB 粉專貼文，甚至幫他做所有的海報。',en:'Agree to write all his FB fan page posts and even create all his posters for him.',t:'S'},
+      {zh:'寄給他一疊餐飲業必看的 AI 轉型建議資料供他參考。',en:'Send him a pile of must-read AI transformation suggestion materials for the restaurant industry.',t:'G'},
+      {zh:'幫他架設一個自動發文＋訂位確認＋評價自動回覆的閉環系統。',en:'Set up a closed-loop system for automated posting, booking confirmation, and auto-reply to reviews.',t:'N'},
+    ]
+  },
+  {
+    sec:'scene',
+    zh:'Q11. 你最希望 AI 幫你解決哪種核心問題？',
+    en:'What core problem do you most want AI to solve for you?',
+    opts:[
+      {zh:'探索需求：獲取最新資訊，讓我掌握技術前沿的變革。',en:'Exploration: Get the latest information so I stay on top of cutting-edge technological changes.',t:'E'},
+      {zh:'人力補足：協助處理超量或繁瑣的工作內容，降低加班頻率。',en:'Capacity: Help handle excessive or tedious work content to reduce overtime frequency.',t:'S'},
+      {zh:'知識整理：輔助篩選與彙整資訊，提升我的學習效率。',en:'Knowledge: Help filter and organize information to improve my learning efficiency.',t:'G'},
+      {zh:'效能優化：自動執行重複勞動，讓我專注於高價值的決策。',en:'Optimization: Automate repetitive tasks so I can focus on high-value decisions.',t:'N'},
+    ]
+  },
+  {
+    sec:'scene',
+    zh:'Q12. 以下哪種情境最讓你有「身為 AI 達人」的成就感？',
+    en:'Which scenario gives you the most satisfaction as an "AI expert"?',
+    opts:[
+      {zh:'在社群媒體發了一篇技術文，被很多人點讚跟轉發。',en:'Posting a technical article on social media that gets lots of likes and shares.',t:'E'},
+      {zh:'客戶對我的速度讚不絕口，雖然我熬夜用 AI 做了一整晚。',en:'Client raves about your speed, even though you stayed up all night using AI.',t:'S'},
+      {zh:'我把雜亂無章的 AI 筆記整理得非常完美，像一座知識寶庫。',en:'Organizing your chaotic AI notes into something perfectly structured, like a knowledge treasure trove.',t:'G'},
+      {zh:'我設計的自動化流程穩定跑了一整個月，幫我省下 40 小時。',en:'The automated workflow you designed has run stably for a full month, saving you 40 hours.',t:'N'},
+    ]
+  },
+  // ── Q13–15: 工作流設定 ──
+  {
+    sec:'workflow',
+    zh:'Q13. 描述你目前與 AI 協作的工作狀態，最像哪一個？',
+    en:'Which best describes your current work state collaborating with AI?',
+    opts:[
+      {zh:'每天都像在冒險，每天都在尋找更好玩的 AI 新工具。',en:'Every day feels like an adventure — always searching for newer, more exciting AI tools.',t:'E'},
+      {zh:'每天都像在趕場，不斷切換不同的對話視窗來應對瑣事。',en:'Every day feels like a race — constantly switching between conversation windows to handle trivial matters.',t:'S'},
+      {zh:'每天都像在讀書，筆記越寫越多，但真實案子卻還沒開始。',en:'Every day feels like studying — notes keep growing, but real projects still haven\'t started.',t:'G'},
+      {zh:'每天都像在巡廠，檢查系統有沒有穩定運作，剩下的時間去生活。',en:'Every day feels like factory inspection — check if systems run stably, then live your life.',t:'N'},
+    ]
+  },
+  {
+    sec:'workflow',
+    zh:'Q14. 如果今天要重複做 100 次相同的資料整理工作，你會？',
+    en:'If you had to repeat the same data organization task 100 times today, you would?',
+    opts:[
+      {zh:'先花半天時間測試不同的 AI Agent 誰最聰明。',en:'Spend half a day first testing which AI Agent is the smartest.',t:'E'},
+      {zh:'手動開好幾個對話框，用 AI 一個一個產出，辛苦一點把它做完。',en:'Manually open several chat windows, use AI to produce one by one, push through to finish.',t:'S'},
+      {zh:'去查如何自動化處理 100 份資料的教學，並存成筆記。',en:'Search for tutorials on how to automate processing 100 files, and save them as notes.',t:'G'},
+      {zh:'直接串接 API 或使用自動化腳本，設定好之後去喝咖啡。',en:'Directly connect the API or use an automation script, set it up, then go get coffee.',t:'N'},
+    ]
+  },
+  {
+    sec:'workflow',
+    zh:'Q15. 假設你下週休假 7 天，你希望 AI 幫你做到什麼程度？',
+    en:'You have 7 days off next week. What level of AI assistance do you hope for?',
+    opts:[
+      {zh:'幫我寫好 7 天份的 AI 技術週報，讓我在朋友圈保持熱度。',en:'Write 7 days\' worth of AI technology newsletters to keep me visible in my social circles.',t:'E'},
+      {zh:'雖然我休假，但只要有人找我，我還是會快速用 AI 幫他回信。',en:'Even on vacation, whenever someone contacts me, you\'ll quickly use AI to help reply.',t:'S'},
+      {zh:'幫我把這週沒看完的 AI 論文與教學影片全部下載並分類好。',en:'Download and categorize all the AI papers and tutorial videos you haven\'t finished this week.',t:'G'},
+      {zh:'讓我的自動化業務持續運作，即便我不在，收入也不會中斷。',en:'Let your automated business keep running — even without you there, income won\'t stop.',t:'N'},
+    ]
+  },
+];
+
+
+const PROFILES = {
+  E: {
+    cls: 'type-explorer', fillCls: 'fill-explorer',
+    icon: '🔭',
+    badgeLabel: '躁進型 · Restless Adopter',
+    titleZh: '科技<span class="accent">探索者</span>',
+    titleEn: 'Tech Explorer',
+    persona: '科技探索者 · 躁進型',
+    quote: '「學很多 AI，收入沒動。每週換一個工具，做一堆 demo，但都不對應真實付費場景。」',
+    quoteEn: '"Learning lots of AI, but income stays flat. Switching tools weekly, building demos — but none map to real paying use cases."',
+    status: '你對 AI 高度敏感，學習速度快，但容易陷入「工具成癮」。\n你最大的風險不是落後，而是「一直在準備，卻從未真正進場」。',
+    statusEn: 'You are highly sensitive to AI and learn quickly, but tend to fall into "tool addiction."\nYour biggest risk is not falling behind — it\'s "always preparing, but never truly starting."',
+    pain: ['工具廣度有餘，但沒有一個場景是真正深入落地的', '每次看到新工具就衝動嘗試，精力被分散、難以累積', '一直在「準備學習」，卻很少真正產出給別人用的成果'],
+    painEn: ['Broad tool knowledge, but no scenario is truly implemented in depth', 'Impulsively trying every new tool, scattering energy and preventing accumulation', 'Always in "preparation mode" — rarely producing output others can actually use'],
+    pathPoints: [
+      '本週選定一個你最常用的 AI 工具，花 3 天只用它完成一件具體的工作任務，不要切換',
+      '每天下班前用 3 句話記錄「今天 AI 幫我完成了什麼」，建立真實使用習慣',
+      '找一位朋友或同事，用 AI 幫他解決一個實際問題，從真實反饋中校準方向',
+    ],
+    pathPointsEn: [
+      'This week, pick the one AI tool you use most and spend 3 days using only it to complete one specific work task — no switching',
+      'Before leaving work each day, write 3 sentences on "what AI helped me accomplish today" to build real usage habits',
+      'Find a friend or colleague and use AI to solve one actual problem for them — calibrate your direction from real feedback',
+    ],
+    hr: '給 HR 的話：科技探索者往往是團隊裡的技術雷達，善用他們的感知能力，但要幫助他們建立「落地優先」的思維框架，讓熱情轉化為可衡量的業務成果。',
+    encourageQuote: '熱情是起點，不是終點。找到那一個願意付錢的場景，你的探索就會開始產生真正的重量。',
+    encourageQuoteEn: 'Passion is the starting point, not the destination. Find the one scenario someone will pay for — and your exploration will start to carry real weight.'
+  },
+  S: {
+    cls: 'type-supporter', fillCls: 'fill-supporter',
+    icon: '⚡',
+    badgeLabel: '狂進型 · Versatile Generalist',
+    titleZh: '全能<span class="accent">應援者</span>',
+    titleEn: 'All-round Supporter',
+    persona: '全能應援者 · 狂進型',
+    quote: '「能力很強，但賺不到對等的錢。什麼案子都接，問題是每個案子都從 0 開始賣自己。」',
+    quoteEn: '"Highly capable but not earning accordingly. Takes every project — but has to sell from scratch every single time."',
+    status: '你已經具備很強的 AI 實戰能力，但你的收入仍然被「時間」綁架。\n問題不是你不夠強，而是你什麼都做，什麼都從0開始。',
+    statusEn: 'You already have strong AI hands-on capability, but your income is still held hostage by "time."\nThe problem isn\'t that you\'re not capable enough — it\'s that you do everything and start from zero every time.',
+    pain: ['什麼都做、什麼都接，時間永遠不夠用', '每個新案子都從零開始，沒有辦法複製上一次的成果', '用努力工作取代系統建立，越忙收入越難提升'],
+    painEn: ['Doing and accepting everything — time is never enough', 'Every new project starts from scratch, impossible to replicate previous results', 'Substituting hard work for system building — the busier you are, the harder it is to grow income'],
+    pathPoints: [
+      '本週把一個你重複做超過 3 次的任務，寫成 AI Prompt 模板，下次直接套用不再重打',
+      '列出你這個月接的案子類型，選出最常見的一種，花一天設計成標準化的交付 SOP',
+      '對下一個詢問案子的客戶，試著推薦「固定服務套餐」而不是接受對方的客製要求',
+    ],
+    pathPointsEn: [
+      'This week, take one task you\'ve done more than 3 times and write it as an AI Prompt template — apply it directly next time without retyping',
+      'List the types of projects you\'ve taken on this month, pick the most common one, and spend one day designing a standardized delivery SOP',
+      'For the next client inquiry, try recommending a "fixed service package" instead of accepting their custom requirements',
+    ],
+    hr: '給 HR 的話：全能應援者是組織裡的萬用接頭，在評估時要幫助他們識別核心專長，協助其建立「T 型能力」——廣度保留，但深度要聚焦在最高價值的場景上。',
+    encourageQuote: '你的能力從來不是問題。真正的槓桿，來自於學會說「不」，聚焦那一件能讓你被記住的事。',
+    encourageQuoteEn: 'Your capability has never been the problem. Real leverage comes from learning to say "no" — and focusing on the one thing that makes you unforgettable.'
+  },
+  G: {
+    cls: 'type-guardian', fillCls: 'fill-guardian',
+    icon: '🗝️',
+    badgeLabel: '亂進型 · Hidden Practitioner',
+    titleZh: '寶藏<span class="accent">守護者</span>',
+    titleEn: 'Treasure Guardian',
+    persona: '寶藏守護者 · 亂進型',
+    quote: '「每天都在用 AI，但完全沒收入。很 AI native，但沒有任何輸出到市場的動作。你覺得自己進步很多，但沒有任何人為你的 AI 能力付過錢。」',
+    quoteEn: '"Using AI every day but zero income. Very AI-native, but nothing shipped to market. You feel like you\'re improving — but no one has ever paid for your AI skills."',
+    status: '你其實很努力，也懂很多，但目前還停留在「AI學習幻覺」。\n沒有市場回饋的成長，很容易讓人誤以為自己正在前進。',
+    statusEn: 'You are genuinely hardworking and knowledgeable, but you\'re still stuck in the "AI learning illusion."\nGrowth without market feedback makes it easy to mistake the feeling of progress for actual progress.',
+    pain: ['收藏的資料越來越多，但真正用過的不到 10%', '等「準備好了」才行動，導致永遠停在學習模式', '沒有輸出給別人看過，自己的進步無法被外部驗證'],
+    painEn: ['Collecting more and more material, but actually using less than 10% of it', 'Waiting until "ready" before acting — resulting in being permanently stuck in learning mode', 'Never showing output to others — your progress cannot be externally verified'],
+    pathPoints: [
+      '今天就把你學過的一個 AI 技巧，用截圖或一段話發在社群或傳給一個朋友，不必完美',
+      '本週幫身邊任何一個人用 AI 解決一件小事（寫一封信、整理一份表格），累積真實案例',
+      '把你 Notion 或收藏夾裡最常看的那一篇筆記，實際操作一遍並記錄結果，驗證是否真的有用',
+    ],
+    pathPointsEn: [
+      'Today, share one AI technique you\'ve learned — post a screenshot or a short description to social media or send it to a friend. It doesn\'t need to be perfect',
+      'This week, use AI to help one person nearby solve one small thing (write an email, organize a spreadsheet) to accumulate real cases',
+      'Take the note you look at most often in Notion or your bookmarks, actually execute it once and record the result — verify whether it\'s truly useful',
+    ],
+    hr: '給 HR 的話：寶藏守護者擁有豐富的內隱知識，關鍵是幫助他們建立「展示機制」——無論是內部分享、專案報告或外部平台，讓他們的價值被組織看見。',
+    encourageQuote: '你已經擁有寶藏，只差一個讓世界看見的勇氣。不完美的輸出，勝過永遠完美的等待。',
+    encourageQuoteEn: 'You already hold the treasure — all you need is the courage to let the world see it. An imperfect output always beats a perfect silence.'
+  },
+  N: {
+    cls: 'type-enabler', fillCls: 'fill-enabler',
+    icon: '🏭',
+    badgeLabel: '精進型 · Strategic Practitioner',
+    titleZh: 'AI <span class="accent">賦能者</span>',
+    titleEn: 'AI Enabler',
+    persona: 'AI 賦能者 · 精進型',
+    quote: '「我不是在學 AI，我是用 AI 建立一個可重複賺錢的系統。把 AI 當槓桿，不是當工具。」',
+    quoteEn: '"I\'m not learning AI — I\'m using AI to build a repeatable revenue system. AI is leverage, not just a tool."',
+    status: '你已經開始用 AI 建立「槓桿系統」。\n你的終點不是接更多案，而是建立 AI 驅動的商業工廠。',
+    statusEn: 'You have already started building a "leverage system" with AI.\nYour destination is not taking on more projects — it\'s building an AI-driven business factory.',
+    pain: ['能力強大反而容易接受各種邀約，導致焦點逐漸分散', '系統建好後缺乏定期檢查，容易因疏忽而讓效能下滑', '難以向外清楚描述自己的核心價值，導致被低估或定價不足'],
+    painEn: ['Strong capability makes it easy to accept various invitations, causing focus to gradually scatter', 'After building systems, lacking regular check-ins makes it easy for performance to quietly decline', 'Difficulty clearly articulating your core value to others — leading to underestimation or underpricing'],
+    pathPoints: [
+      '每週花 30 分鐘檢查一次你的自動化流程，確認系統穩定運作並記錄改善點',
+      '寫下你目前最核心的一項 AI 服務，用一句話說清楚「它幫客戶省了什麼、賺了什麼」',
+      '對下一個找你的機會，先問自己「這件事能否模組化複製？」若不能，評估是否婉拒',
+    ],
+    pathPointsEn: [
+      'Spend 30 minutes each week reviewing your automated workflows — confirm stable operation and log improvement points',
+      'Write down your most core AI service and describe in one sentence exactly "what it saves clients and what it earns them"',
+      'For the next opportunity that comes your way, first ask yourself "can this be modularized and replicated?" — if not, consider politely declining',
+    ],
+    hr: '給 HR 的話：AI 賦能者是組織裡最稀缺的角色。招募或培育時，關注他們是否具備「場景定義能力」與「模組化思維」——這兩者比工具熟練度更難替代，也更有戰略價值。',
+    encourageQuote: '你已經看見了別人還看不見的事。持續深耕，讓系統替你工作，讓複利替你說話。',
+    encourageQuoteEn: 'You already see what others cannot. Keep going deep — let your systems do the work, and let compounding speak for you.'
+  }
+};
+
+// ── STATE ──
+let cur = 0;
+const tally = {E:0, S:0, G:0, N:0};
+const answerLog = [];
+
+function startQuiz() {
+  document.getElementById('screen-intro').style.display = 'none';
+  document.getElementById('screen-quiz').style.display = 'block';
+  document.getElementById('progress-bar').classList.add('visible');
+  renderQ();
+}
+
+function renderQ() {
+  const q = QS[cur];
+  const pct = Math.round(cur/15*100);
+  document.getElementById('pb-fill').style.width = pct+'%';
+  document.getElementById('pb-pct').textContent = pct+'%';
+  document.getElementById('pb-label').textContent = 'Q'+String(cur+1).padStart(2,'0')+' / 15';
+  document.getElementById('q-counter').textContent = 'QUESTION '+String(cur+1).padStart(2,'0')+' / 15';
+  const sec = SECTIONS[q.sec];
+  document.getElementById('q-section').textContent = sec.zh+' · '+sec.en;
+  document.getElementById('q-text').textContent = q.zh;
+  document.getElementById('q-text-en').textContent = q.en;
+
+  const keys = ['A','B','C','D'];
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.opts.forEach((o,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-key">${keys[i]}</span><span class="opt-body"><span class="opt-zh">${o.zh}</span><br><span class="opt-en">${o.en}</span></span>`;
+    btn.onclick = () => pick(o.t, btn);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('screen-quiz').classList.remove('fade-in');
+  void document.getElementById('screen-quiz').offsetWidth;
+  document.getElementById('screen-quiz').classList.add('fade-in');
+}
+
+function pick(type, btn) {
+  document.querySelectorAll('.opt').forEach(b => { b.classList.add('reveal'); b.disabled = true; });
+  btn.classList.remove('reveal');
+  btn.classList.add('selected-correct');
+  tally[type]++;
+  answerLog.push(type);
+  setTimeout(() => {
+    cur++;
+    if (cur < 15) renderQ();
+    else showCollect();   // go to collect screen first
+  }, 500);
+}
+
+// ── Show collect (name/email) screen ──
+function showCollect() {
+  document.getElementById('progress-bar').classList.remove('visible');
+  document.getElementById('screen-quiz').style.display = 'none';
+  document.getElementById('screen-collect').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Validate → POST to GAS → show result ──
+async function handleSubmit() {
+  const nameEl   = document.getElementById('collect-name');
+  const emailEl  = document.getElementById('collect-email');
+  const errName  = document.getElementById('err-name');
+  const errEmail = document.getElementById('err-email');
+  const btn      = document.getElementById('collect-submit-btn');
+
+  // Reset error states
+  nameEl.classList.remove('error');
+  emailEl.classList.remove('error');
+  errName.classList.remove('show');
+  errEmail.classList.remove('show');
+
+  const name  = nameEl.value.trim();
+  const email = emailEl.value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // ── Validation: alert + inline error, block navigation ──
+  if (!name && !emailRe.test(email)) {
+    nameEl.classList.add('error');  errName.classList.add('show');
+    emailEl.classList.add('error'); errEmail.classList.add('show');
+    alert('請填寫姓名與有效的電子信箱後再送出。\nPlease fill in your name and a valid email before submitting.');
+    return;
+  }
+  if (!name) {
+    nameEl.classList.add('error'); errName.classList.add('show');
+    alert('請填寫姓名。\nPlease enter your name.');
+    nameEl.focus();
+    return;
+  }
+  if (!emailRe.test(email)) {
+    emailEl.classList.add('error'); errEmail.classList.add('show');
+    alert('請填寫有效的電子信箱格式（例如 user@example.com）。\nPlease enter a valid email address (e.g. user@example.com).');
+    emailEl.focus();
+    return;
+  }
+
+  // ── Determine result type ──
+  let winner = 'E', max = 0;
+  for (const t in tally) if (tally[t] > max) { max = tally[t]; winner = t; }
+  const p = PROFILES[winner];
+  const scoreVal = tally[winner];
+  const typeVal  = p.persona;   // e.g. "全能應援者 · 狂進型"
+
+  // ── Sending state ──
+  btn.disabled = true;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 傳送中…';
+
+  // ── POST to Google Apps Script (JSON + no-cors) ──
+  // 使用 JSON.stringify 避免 FormData cloning 錯誤
+  // mode:'no-cors' 讓瀏覽器不攔截跨域請求（response 為 opaque，無法讀取，但 GAS 仍會收到）
+ const formData = new FormData();
+formData.append('name',  name);
+formData.append('email', email);
+formData.append('score', String(scoreVal));
+formData.append('type',  typeVal);
+
+fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode:   'no-cors',
+    body:   formData,
+  }).catch(function(err) {
+    console.warn('[HRRR] GAS submission error:', err.message);
+  });
+  // 不 await — 資料傳送後立即跳轉，不阻塞 UX
+
+  // ── 跳轉到結果頁（無論 fetch 成功與否都執行）──
+  document.getElementById('screen-collect').style.display = 'none';
+  showResult();
+}
+
+function showResult() {
+  document.getElementById('progress-bar').classList.remove('visible');
+  document.getElementById('screen-quiz').style.display = 'none';
+
+  // Find winner
+  let winner = 'E', max = 0;
+  for (const t in tally) if (tally[t] > max) { max = tally[t]; winner = t; }
+
+  const p = PROFILES[winner];
+  const maxPoss = 15;
+
+  // Compute per-domain scores based on which questions map to which domain
+  // QS order: Q1-3=basic, Q4-6=prompt, Q7-9=tools, Q10-12=scene, Q13-15=workflow
+  // Each question: N answer = highest competency for that domain
+  const domainScores = { basic: 0, prompt: 0, tools: 0, scene: 0, workflow: 0 };
+  const domainKeys = ['basic','basic','basic','prompt','prompt','prompt','tools','tools','tools','scene','scene','scene','workflow','workflow','workflow'];
+  // We store individual answer types per question in answerLog
+  answerLog.forEach((t, i) => {
+    const domain = domainKeys[i];
+    const scoreMap = { N: 4, S: 3, E: 2, G: 1 };
+    domainScores[domain] = (domainScores[domain] || 0) + (scoreMap[t] || 0);
+  });
+  // Max per domain = 3 questions × 4 = 12
+  const domainMax = 12;
+  const domainLabels    = ['基礎使用','提示詞工程','特定工具','應用場景','工作流設定'];
+  const domainLabelsEn  = ['Basic Usage','Prompt Eng.','Tool Expertise','Application','Workflow'];
+  const domainOrder  = ['basic','prompt','tools','scene','workflow'];
+  const domainPcts   = domainOrder.map(k => Math.round(domainScores[k] / domainMax * 100));
+
+  // Build SVG pentagon radar
+  const cx = 130, cy = 145, R = 96;  // cy shifted down to give top label room
+  const angles = domainOrder.map((_, i) => (Math.PI * 2 * i / 5) - Math.PI / 2);
+  function polarPoint(r, angle) {
+    return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
+  }
+  // Grid rings
+  let gridSvg = '';
+  [0.25, 0.5, 0.75, 1].forEach(frac => {
+    const pts = angles.map(a => polarPoint(R * frac, a).join(',')).join(' ');
+    gridSvg += `<polygon points="${pts}" fill="none" stroke="rgba(205,184,166,0.12)" stroke-width="1"/>`;
+  });
+  // Axes
+  let axesSvg = angles.map(a => {
+    const [x,y] = polarPoint(R, a);
+    return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(205,184,166,0.12)" stroke-width="1"/>`;
+  }).join('');
+  // Data polygon
+  const dataPts = angles.map((a, i) => polarPoint(R * domainPcts[i] / 100, a).join(',')).join(' ');
+  // Labels — bilingual (ZH on first line, EN on second line inside SVG)
+  const labelOffset = 26;
+  let labelsSvg = angles.map((a, i) => {
+    const [x, y] = polarPoint(R + labelOffset, a);
+    // For the top vertex (i=0, angle=-π/2), shift y up a bit more for the EN line
+    const zhY = y - 4;
+    const enY = y + 10;
+    return `<text x="${x}" y="${zhY}" text-anchor="middle" dominant-baseline="middle"
+      font-family="'Noto Serif TC', serif" font-size="10" fill="rgba(226,211,200,0.65)">${domainLabels[i]}</text>
+      <text x="${x}" y="${enY}" text-anchor="middle" dominant-baseline="middle"
+      font-family="'DM Mono', monospace" font-size="7" fill="rgba(205,184,166,0.38)">${domainLabelsEn[i]}</text>`;
+  }).join('');
+  // Percentage dots
+  let dotsSvg = angles.map((a, i) => {
+    const [x, y] = polarPoint(R * domainPcts[i] / 100, a);
+    return `<circle cx="${x}" cy="${y}" r="3.5" fill="rgba(205,184,166,0.9)"/>`;
+  }).join('');
+
+  const radarSvg = `
+    <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg" class="radar-svg">
+      ${gridSvg}
+      ${axesSvg}
+      <polygon points="${dataPts}" fill="rgba(205,184,166,0.15)" stroke="rgba(205,184,166,0.7)" stroke-width="1.5"/>
+      ${dotsSvg}
+      ${labelsSvg}
+    </svg>`;
+
+  // Domain score rows — bilingual labels
+  const domainBarHtml = domainOrder.map((k, i) => `
+    <div class="r-radar-row">
+      <span class="r-radar-label">${domainLabels[i]}<span class="r-radar-label-en">${domainLabelsEn[i]}</span></span>
+      <div class="r-dist-track"><div class="r-dist-fill fill-sand" style="width:${domainPcts[i]}%;transition:width 1.2s ease ${0.2 + i*0.1}s"></div></div>
+      <span class="r-dist-count">${domainPcts[i]}%</span>
+    </div>`).join('');
+
+  const statusHtml = p.status.replace(/\n/g, '<br>');
+  const statusEnHtml = p.statusEn.replace(/\n/g, '<br>');
+  let painHtml = p.pain.map((x, i) => `<li>${x}<span class="r-en-sub">${p.painEn[i]}</span></li>`).join('');
+  let actionHtml = p.pathPoints.map((x, i) => `<li>${x}<span class="r-en-sub">${p.pathPointsEn[i]}</span></li>`).join('');
+
+  const html = `
+    <div class="result-shell">
+      <div class="result-corner tl"></div>
+      <div class="result-corner tr"></div>
+      <div class="result-corner bl"></div>
+      <div class="result-corner br"></div>
+
+      <div class="result-inner">
+
+        <div style="text-align:center;margin-bottom:2.5rem" class="fade-in">
+          <p class="rh-kicker">Assessment Complete · 檢測完成</p>
+          <div class="rh-badge"><span>${p.icon}</span>${p.badgeLabel}</div>
+          <h2 class="rh-title">${p.titleZh}</h2>
+          <p class="rh-en">${p.titleEn}</p>
+          <p class="rh-persona">${p.persona}</p>
+        </div>
+
+        <div class="r-section fade-in">
+          <p class="r-section-label r-section-label--lg">現況診斷 · Current Status</p>
+          <div class="r-body">${statusHtml}</div>
+          <div class="r-body r-body-en">${statusEnHtml}</div>
+        </div>
+
+        <div class="r-section fade-in">
+          <p class="r-section-label r-section-label--lg">能力分析 · Competency Radar</p>
+          <div class="radar-wrap">
+            ${radarSvg}
+            <div class="radar-bars">${domainBarHtml}</div>
+          </div>
+        </div>
+
+        <div class="r-section fade-in">
+          <p class="r-section-label r-section-label--lg">核心痛點 · Pain Points</p>
+          <ul class="r-body r-bilingual-list">${painHtml}</ul>
+        </div>
+
+        <div class="r-section fade-in">
+          <p class="r-section-label r-section-label--lg">行動指南 · Action Guide</p>
+          <ul class="r-body r-action-list r-bilingual-list">${actionHtml}</ul>
+        </div>
+
+        <div class="r-encouragement fade-in">
+          <p class="r-enc-quote">${p.encourageQuote}</p>
+          <p class="r-enc-quote-en">${p.encourageQuoteEn}</p>
+          <button class="btn-restart-dark" onclick="restartQuiz()">↩ 重新測驗 · Retake</button>
+        </div>
+
+        <div class="r-share-section fade-in">
+          <p class="r-section-label r-section-label--lg">分享檢測結果 · Share Your Result</p>
+          <p class="r-share-hint">點擊「儲存圖卡」將結果下載為精美圖片，分享至社群媒體。<br><span style="font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(205,184,166,0.38);letter-spacing:0.03em">Click "Save Card" to download your result as a shareable image.</span></p>
+
+          <div id="result-card" class="share-card">
+            <div class="sc-corner sc-tl"></div>
+            <div class="sc-corner sc-tr"></div>
+            <div class="sc-corner sc-bl"></div>
+            <div class="sc-corner sc-br"></div>
+
+            <div class="sc-brand">人資萬應室 · HR Room of Requirement · AI Core Skills Assessment</div>
+
+            <div class="sc-type-badge">${p.icon} ${p.badgeLabel}</div>
+            <h2 class="sc-title">${p.persona.split('·')[0].trim()}</h2>
+            <p class="sc-title-en">${p.titleEn}</p>
+
+            <div class="sc-divider"></div>
+
+            <p class="sc-status">${p.status.replace(/\n/g,'<br>')}</p>
+            <p class="sc-status-en">${p.statusEn.replace(/\n/g,'<br>')}</p>
+
+            <div class="sc-radar-section">
+              <p class="sc-radar-label">能力分析 · Competency Radar</p>
+              <div class="sc-radar-wrap">
+                <div class="sc-radar-svg-wrap">
+                  ${radarSvg.replace('class="radar-svg"','class="sc-radar-svg"')}
+                </div>
+                <div class="sc-bars">
+                  ${domainOrder.map((k, i) => `
+                    <div class="sc-bar-row">
+                      <span class="sc-bar-name">${domainLabels[i]}<span class="sc-bar-name-en">${domainLabelsEn[i]}</span></span>
+                      <div class="sc-bar-track"><div class="sc-bar-fill" style="width:${domainPcts[i]}%"></div></div>
+                      <span class="sc-bar-pct">${domainPcts[i]}%</span>
+                    </div>`).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="sc-footer">
+              <span class="sc-url">hrrr.2024 · AI 核心技能自我檢測</span>
+              <span class="sc-date">${new Date().toLocaleDateString('zh-TW')}</span>
+            </div>
+          </div>
+
+          <button class="sc-download-btn" onclick="downloadCard()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+            儲存圖卡 · Save Card
+          </button>
+        </div>
+
+        <div class="r-social-block fade-in">
+          <p class="r-social-invite"><span class="wand">🪄</span>歡迎加入【人資萬應室】<br>了解更多你有所不知的事情，一起探索 AI 時代的人資新視野。<br><span class="r-social-invite-en">Join HR Room of Requirement — discover what you don't yet know and explore the new horizon of HR in the AI era.</span></p>
+          <div class="r-social-links">
+            <a href="https://www.linkedin.com/company/hrrr/?viewAsMember=true" target="_blank" class="r-social-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://www.instagram.com/hrrr.2024?igsh=MXFha3RjOGJqeDVlbQ%3D%3D&utm_source=qr" target="_blank" class="r-social-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              Instagram
+            </a>
+            <a href="https://www.facebook.com/share/1CgLau41ow/?mibextid=wwXIfr" target="_blank" class="r-social-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+              Facebook
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  const rs = document.getElementById('screen-result');
+  rs.style.display = 'block';
+  document.getElementById('result-content').innerHTML = html;
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  // Store for canvas download
+  window._shareData = {
+    icon: p.icon,
+    badgeLabel: p.badgeLabel,
+    titleClean: p.persona.split('·')[0].trim(),
+    titleEn: p.titleEn,
+    status: p.status,
+    statusEn: p.statusEn,
+    domainLabels,
+    domainLabelsEn,
+    domainPcts,
+    encourageQuoteEn: p.encourageQuoteEn,
+  };
+}
+
+function downloadCard() {
+  const btn = document.querySelector('.sc-download-btn');
+  const origHTML = btn ? btn.innerHTML : '';
+  if (btn) btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 生成中…';
+
+  const W = 1080;
+  // Height is calculated dynamically after drawing to avoid overlap.
+  // We first draw onto an oversized canvas, measure actual cy, then crop/re-render.
+  // Simpler approach: just make H large enough to always fit.
+  const H = 2400;   // expanded from 1920 — guarantees no overflow
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const d = window._shareData;
+  const PAD = 80;
+  const CW = W - PAD * 2;
+
+  // ── 1. Solid background ──
+  ctx.fillStyle = '#111827';
+  ctx.fillRect(0, 0, W, H);
+
+  // Subtle radial glow top-left (plain fillRect over radial gradient)
+  const grd = ctx.createRadialGradient(W * 0.2, H * 0.15, 0, W * 0.2, H * 0.15, 600);
+  grd.addColorStop(0, 'rgba(78,61,92,0.28)');
+  grd.addColorStop(1, 'rgba(78,61,92,0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, H);
+
+  // ── 2. Border — simple rect, no rounded corners ──
+  ctx.strokeStyle = 'rgba(205,184,166,0.28)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(24, 24, W - 48, H - 48);
+
+  // Corner tick marks (L-shapes at each corner)
+  const TK = 40, TO = 24;
+  ctx.strokeStyle = 'rgba(205,184,166,0.48)';
+  ctx.lineWidth = 3;
+  [
+    [TO, TO, 1, 1],
+    [W - TO, TO, -1, 1],
+    [TO, H - TO, 1, -1],
+    [W - TO, H - TO, -1, -1]
+  ].forEach(([x, y, sx, sy]) => {
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + sx * TK, y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + sy * TK); ctx.stroke();
+  });
+
+  let cy = PAD + 24;
+
+  // ── 3. Brand text ──
+  ctx.font = '400 22px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(205,184,166,0.32)';
+  ctx.textAlign = 'left';
+  ctx.fillText('人資萬應室 · HR Room of Requirement', PAD, cy);
+  cy += 52;  // brand line height + gap
+
+  // ── 4. Badge — plain rect ──
+  const BADGE_H = 44;
+  ctx.font = '500 24px "DM Mono", monospace';
+  const bText = d.icon + '  ' + d.badgeLabel;
+  const bW = ctx.measureText(bText).width + 48;
+  ctx.fillStyle = 'rgba(205,184,166,0.07)';
+  ctx.fillRect(PAD, cy, bW, BADGE_H);
+  ctx.strokeStyle = 'rgba(205,184,166,0.28)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(PAD, cy, bW, BADGE_H);
+  ctx.fillStyle = 'rgba(205,184,166,0.88)';
+  // Vertically centre text in badge: baseline = cy + BADGE_H*0.68
+  ctx.fillText(bText, PAD + 20, cy + BADGE_H * 0.68);
+  cy += BADGE_H + 36;  // badge height + gap before title
+
+  // ── 5. Main title (110px cap-height ≈ 88px above baseline) ──
+  const TITLE_FONT_SIZE = 110;
+  ctx.font = '700 ' + TITLE_FONT_SIZE + 'px "Noto Serif TC", serif';
+  ctx.fillStyle = '#e2d3c8';
+  ctx.shadowColor = 'rgba(205,184,166,0.18)';
+  ctx.shadowBlur = 36;
+  ctx.fillText(d.titleClean, PAD, cy + TITLE_FONT_SIZE * 0.82);  // baseline offset
+  ctx.shadowBlur = 0;
+  cy += TITLE_FONT_SIZE + 32;  // full font size + clear gap before EN subtitle
+
+  // ── EN subtitle — sits clearly below title ──
+  const EN_FONT_SIZE = 28;
+  ctx.font = '400 ' + EN_FONT_SIZE + 'px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(205,184,166,0.38)';
+  ctx.fillText(d.titleEn.toUpperCase(), PAD, cy + EN_FONT_SIZE * 0.8);
+  cy += EN_FONT_SIZE + 56;  // EN line + generous gap to divider
+
+  // ── 6. Divider (gradient line) ──
+  const dGrd = ctx.createLinearGradient(PAD, 0, PAD + 180, 0);
+  dGrd.addColorStop(0, 'rgba(205,184,166,0.55)');
+  dGrd.addColorStop(1, 'rgba(205,184,166,0)');
+  ctx.strokeStyle = dGrd;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(PAD, cy);
+  ctx.lineTo(PAD + 180, cy);
+  ctx.stroke();
+  cy += 44;  // divider + gap to status
+
+  // ── 7. Status text — Chinese (CJK word-wrap) ──
+  const STATUS_LINE_H = 56;
+  ctx.font = '400 36px "Noto Serif TC", serif';
+  ctx.fillStyle = 'rgba(226,211,200,0.65)';
+  const statusLines = d.status.split('\n');
+  statusLines.forEach(line => {
+    const wrapped = splitTextToLines(ctx, line, CW * 0.86);
+    wrapped.forEach(wl => { ctx.fillText(wl, PAD, cy); cy += STATUS_LINE_H; });
+  });
+  cy += 16;
+
+  // Status — English translation (smaller, dimmer)
+  ctx.font = '400 26px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(205,184,166,0.36)';
+  const statusEnLines = d.statusEn.split('\n');
+  statusEnLines.forEach(line => {
+    const wrapped = splitTextToLines(ctx, line, CW * 0.88);
+    wrapped.forEach(wl => { ctx.fillText(wl, PAD, cy); cy += 40; });
+  });
+  cy += 44;  // breathing room before radar label
+
+  // ── 8. Radar section label ──
+  ctx.font = '400 22px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(205,184,166,0.32)';
+  ctx.fillText('能力分析  COMPETENCY RADAR', PAD, cy);
+  cy += 52;  // label height + gap before radar starts
+
+  // ── 9. Pentagon radar — centred ──
+  const rCx = W / 2;
+  const rR = 210;
+  const rCy = cy + rR + 115;  // shifted down ~55px ≈ 1.5cm at this resolution
+  const angls = [0, 1, 2, 3, 4].map(i => (Math.PI * 2 * i / 5) - Math.PI / 2);
+
+  // Grid rings (pentagons)
+  [0.25, 0.5, 0.75, 1].forEach(f => {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(205,184,166,0.1)';
+    ctx.lineWidth = 1.5;
+    angls.forEach((a, i) => {
+      const px = rCx + rR * f * Math.cos(a);
+      const py = rCy + rR * f * Math.sin(a);
+      i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    });
+    ctx.closePath();
+    ctx.stroke();
+  });
+
+  // Axes
+  angls.forEach(a => {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(205,184,166,0.1)';
+    ctx.lineWidth = 1;
+    ctx.moveTo(rCx, rCy);
+    ctx.lineTo(rCx + rR * Math.cos(a), rCy + rR * Math.sin(a));
+    ctx.stroke();
+  });
+
+  // Data fill polygon
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(205,184,166,0.14)';
+  ctx.strokeStyle = 'rgba(205,184,166,0.72)';
+  ctx.lineWidth = 3;
+  angls.forEach((a, i) => {
+    const r = rR * d.domainPcts[i] / 100;
+    const px = rCx + r * Math.cos(a);
+    const py = rCy + r * Math.sin(a);
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  });
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Data point dots (arc circles — safe)
+  angls.forEach((a, i) => {
+    const r = rR * d.domainPcts[i] / 100;
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(205,184,166,0.92)';
+    ctx.arc(rCx + r * Math.cos(a), rCy + r * Math.sin(a), 8, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // Labels — bilingual: ZH line + EN line below
+  ctx.textAlign = 'center';
+  angls.forEach((a, i) => {
+    const lOff = rR + 76;
+    const lx = rCx + lOff * Math.cos(a);
+    const ly = rCy + lOff * Math.sin(a);
+    // Chinese label
+    ctx.font = '400 28px "Noto Serif TC", serif';
+    ctx.fillStyle = 'rgba(226,211,200,0.65)';
+    ctx.fillText(d.domainLabels[i], lx, ly + 4);
+    // English sub-label
+    ctx.font = '400 19px "DM Mono", monospace';
+    ctx.fillStyle = 'rgba(205,184,166,0.36)';
+    ctx.fillText(d.domainLabelsEn[i], lx, ly + 28);
+  });
+  ctx.textAlign = 'left';
+
+  cy = rCy + rR + 130;  // generous gap below radar labels before bars
+
+  // ── 10. Ability bar rows — redesigned for clarity ──
+  // Layout per row:
+  //   ZH label (32px)  +  EN label (22px)  +  bar track (14px tall, centred)
+  //   Total row height = 100px with 20px bottom gap = 120px per row
+  const BAR_ROW_H   = 112;  // full row height including bottom gap
+  const BAR_H       = 14;   // bar track height (thicker = more visual weight)
+  const BAR_LABEL_W = 168;  // reserved width for labels
+  const BAR_PCT_W   = 88;   // reserved width for percentage on the right
+  const BAR_X       = PAD + BAR_LABEL_W + 16;
+  const BAR_W       = CW - BAR_LABEL_W - BAR_PCT_W - 16;
+
+  d.domainLabels.forEach((lbl, i) => {
+    const rowTop = cy + i * BAR_ROW_H;
+
+    // ── ZH label ──
+    ctx.font = '400 30px "Noto Serif TC", serif';
+    ctx.fillStyle = 'rgba(226,211,200,0.7)';
+    ctx.textAlign = 'left';
+    ctx.fillText(lbl, PAD, rowTop + 28);
+
+    // ── EN label ──
+    ctx.font = '400 20px "DM Mono", monospace';
+    ctx.fillStyle = 'rgba(205,184,166,0.32)';
+    ctx.fillText(d.domainLabelsEn[i], PAD, rowTop + 56);
+
+    // ── Bar track — centred vertically at row midpoint ──
+    const barY = rowTop + 20;   // aligned near ZH label baseline
+    ctx.fillStyle = 'rgba(255,255,255,0.06)';
+    ctx.fillRect(BAR_X, barY, BAR_W, BAR_H);
+
+    // ── Bar fill ──
+    const fillW = BAR_W * d.domainPcts[i] / 100;
+    ctx.fillStyle = 'rgba(205,184,166,0.65)';
+    ctx.fillRect(BAR_X, barY, fillW, BAR_H);
+
+    // ── Percentage — aligned right, same height as ZH label ──
+    ctx.font = '500 26px "DM Mono", monospace';
+    ctx.fillStyle = 'rgba(205,184,166,0.5)';
+    ctx.textAlign = 'right';
+    ctx.fillText(d.domainPcts[i] + '%', PAD + CW, rowTop + 28);
+    ctx.textAlign = 'left';
+
+    // ── Row separator (very subtle) ──
+    if (i < d.domainLabels.length - 1) {
+      ctx.strokeStyle = 'rgba(205,184,166,0.06)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(PAD, rowTop + BAR_ROW_H - 12);
+      ctx.lineTo(W - PAD, rowTop + BAR_ROW_H - 12);
+      ctx.stroke();
+    }
+  });
+
+  // Move cy to just after the last bar row
+  cy += d.domainLabels.length * BAR_ROW_H;
+
+  // ── Guaranteed 80px breathing space before footer line ──
+  cy += 80;
+
+  // ── 11. Footer ──
+  ctx.strokeStyle = 'rgba(205,184,166,0.12)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(PAD, cy);
+  ctx.lineTo(W - PAD, cy);
+  ctx.stroke();
+
+  const FOOTER_TEXT_Y = cy + 44;
+  ctx.font = '400 22px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(205,184,166,0.26)';
+  ctx.fillText('hrrr.2024 · AI 核心技能自我檢測 · AI Core Skills Assessment', PAD, FOOTER_TEXT_Y);
+  ctx.textAlign = 'right';
+  ctx.fillText(new Date().toLocaleDateString('zh-TW'), W - PAD, FOOTER_TEXT_Y);
+  ctx.textAlign = 'left';
+
+  // ── Final canvas height = footer text + 40px bottom padding (tight, no excess) ──
+  const FINAL_H = FOOTER_TEXT_Y + 40;
+
+  // ── 12. Crop to content and export ──
+  // Draw border and corner ticks again to match the real final height
+  // (the original border was drawn with H=2400; redraw with FINAL_H)
+  ctx.strokeStyle = 'rgba(205,184,166,0.28)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(24, 24, W - 48, FINAL_H - 48);
+
+  const TK2 = 40, TO2 = 24;
+  ctx.strokeStyle = 'rgba(205,184,166,0.48)';
+  ctx.lineWidth = 3;
+  [[TO2, FINAL_H - TO2, 1, -1], [W - TO2, FINAL_H - TO2, -1, -1]].forEach(([x, y, sx, sy]) => {
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + sx * TK2, y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + sy * TK2); ctx.stroke();
+  });
+
+  try {
+    // Crop to FINAL_H using a second canvas
+    const cropped = document.createElement('canvas');
+    cropped.width  = W;
+    cropped.height = FINAL_H;
+    const cCtx = cropped.getContext('2d');
+    cCtx.drawImage(canvas, 0, 0, W, FINAL_H, 0, 0, W, FINAL_H);
+
+    const dataUrl = cropped.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = 'my-skill-result.png';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); }, 300);
+  } catch (e) {
+    alert('圖片生成失敗，請截圖儲存。\nImage generation failed — please screenshot instead.');
+  }
+
+  if (btn) setTimeout(() => { btn.innerHTML = origHTML; }, 1000);
+}
+
+// Split CJK/mixed text into lines that fit maxWidth
+function splitTextToLines(ctx, text, maxW) {
+  const lines = [];
+  let line = '';
+  for (let i = 0; i < text.length; i++) {
+    const test = line + text[i];
+    if (ctx.measureText(test).width > maxW && line.length > 0) {
+      lines.push(line);
+      line = text[i];
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+// Manual arc-based rounded rect path (NOT ctx.roundRect — safe fallback)
+function arcRoundRect(ctx, x, y, w, h, r) {
+  const R = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + R, y);
+  ctx.lineTo(x + w - R, y);
+  ctx.arc(x + w - R, y + R, R, -Math.PI / 2, 0);
+  ctx.lineTo(x + w, y + h - R);
+  ctx.arc(x + w - R, y + h - R, R, 0, Math.PI / 2);
+  ctx.lineTo(x + R, y + h);
+  ctx.arc(x + R, y + h - R, R, Math.PI / 2, Math.PI);
+  ctx.lineTo(x, y + R);
+  ctx.arc(x + R, y + R, R, Math.PI, -Math.PI / 2);
+  ctx.closePath();
+}
+
+function restartQuiz() {
+  cur = 0;
+  tally.E = tally.S = tally.G = tally.N = 0;
+  answerLog.length = 0;
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-collect').style.display = 'none';
+  document.getElementById('result-content').innerHTML = '';
+  document.getElementById('screen-intro').style.display = 'block';
+  document.getElementById('progress-bar').classList.remove('visible');
+  document.getElementById('pb-fill').style.width = '0%';
+  // Reset collect inputs
+  const n = document.getElementById('collect-name');
+  const e = document.getElementById('collect-email');
+  if (n) n.value = '';
+  if (e) e.value = '';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
